@@ -6,4 +6,14 @@
     <StartupObject>PokerHandSorter.Sorter</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="poker-hands.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="poker-hands.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
