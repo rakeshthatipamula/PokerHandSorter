@@ -20,7 +20,8 @@ namespace PokerHandSorter
         {
             this.cards = cards;
         }
-
+        
+        //Checking String Length and assigning each character of String to Cards
         public Hand(string[] strArr)
         {
             if (strArr.Length != 5)
@@ -37,12 +38,12 @@ namespace PokerHandSorter
                 this.cards = cards;
             }
         }
-
+        //Method to sort the character values stored in cards.
         public virtual void sortCards()
         {
             Array.Sort(this.cards);
         }
-
+        //get card details
         public virtual Card getCard(int index)
         {
             if (index >= 5)
@@ -51,7 +52,7 @@ namespace PokerHandSorter
             }
             return cards[index];
         }
-
+        //Method to print the values
         public override string ToString()
         {
             string str = "";
@@ -77,7 +78,7 @@ namespace PokerHandSorter
         {
                 return this.handValue;
         }
-
+        //Method to Evaluate the Combination type for the Hands
         public virtual void evaluate()
         {
 
@@ -141,7 +142,8 @@ namespace PokerHandSorter
             this.handValue = this.getCard(4).getValue();
             this.category = HandCategory.HIGH_CARD;
         }
-
+        //Method to validate all the suits are same i.e., Is it a Royal Flush or Straight Flush
+        //Example D 6D 7D TD QD
         private int allSameSuit()
         {
             char prev = this.cards[0].getSuit();
@@ -159,7 +161,8 @@ namespace PokerHandSorter
             this.handValue = total;
             return total;
         }
-
+        //Method to validate the combination is a Pair 
+        //Example 4H 4C 6S 7S KD
         private int pair()
         {
             int prev = this.cards[4].getValue();
@@ -187,7 +190,8 @@ namespace PokerHandSorter
             }
             return -1;
         }
-
+        //Method to validate the combination is a TwoPair 
+        //Example 4H 4C 6S 6S KD
         private int twoPairs()
         {
             int prev = this.cards[4].getValue();
@@ -249,7 +253,8 @@ namespace PokerHandSorter
             }
             return -1;
         }
-
+        //Method to validate the combination is a Three 
+        //Example 3D 9C AS AH AC
         private int three()
         {
             int prev = this.cards[4].getValue();
@@ -278,9 +283,10 @@ namespace PokerHandSorter
             }
             return -1;
         }
+        //Method to validate the combination is a FullHouse 
+        //Example 2H 2D 4C 4D 4S
         private int fullHouse()
         {
-            //System.out.println(this.toString());
             bool changed = false;
             int prev = this.cards[4].getValue();
             int total = 0, nOfCards = 1;
@@ -315,12 +321,12 @@ namespace PokerHandSorter
                 }
                 prev = this.cards[i].getValue();
             }
-            //System.out.println(total);
             this.handValue = total;
             return total;
 
         }
-
+        //Method to validate the combination is a Four
+        //Example AD AH AS AC
         private int four()
         {
 
@@ -351,8 +357,8 @@ namespace PokerHandSorter
             }
             return -1;
         }
-
-
+        //Method to validate the combination is a straight
+        //Example 3D 4H 5S 6C 7H
         private int straight()
         {
 

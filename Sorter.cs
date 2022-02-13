@@ -30,7 +30,7 @@ namespace PokerHandSorter
                     {
                         break;
                     }
-                    //	//a simple input validation using regex
+                    //Input validation using regex
                     Regex expression = new Regex(@"(?:[2-9TJQKA][SCHD] ){9}[2-9TJQKA][SCHD]");
                     if (!expression.IsMatch(input))
                     {
@@ -39,20 +39,27 @@ namespace PokerHandSorter
                     }
                     else
                     {
+                        //Splitting the string with space Delimiter
                         string[] cards = input.Split(" ");
 
-
+                        //Input String is split into 5 each for Player1 and Player2
                         string[] handOneStr = Arrays.CopyOfRange(cards, 0, 5);
                         string[] handTwoStr = Arrays.CopyOfRange(cards, 5, 10);
-
+                        
+                        //Adding Player1 and Player2 Hands to Hand Class
                         Hand handOne = new Hand(handOneStr);
                         Hand handTwo = new Hand(handTwoStr);
-
+                        
+                        //Cards are sorted out for both the Players
                         handOne.sortCards();
                         handTwo.sortCards();
-
+                        
+                        //Evaluating the player hands whether they fall under which category among the 
+                        //given 10 combinations
                         handOne.evaluate();
                         handTwo.evaluate();
+
+                        //Deciding the Winner among the two basis the Evaluation
                         int res = winner(handOne, handTwo);
                         if (res == 1)
                         {
