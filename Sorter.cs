@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace PokerHandSorter
 {
@@ -19,6 +20,7 @@ namespace PokerHandSorter
 
             try
             {
+                Console.WriteLine("Please Enter the File Name");
                 br = new StreamReader(Console.ReadLine());
                 // main loop for piping through stdin
                 while (true)
@@ -29,7 +31,8 @@ namespace PokerHandSorter
                         break;
                     }
                     //	//a simple input validation using regex
-                    if (!input.matches("(?:[2-9TJQKA][SCHD] ){9}[2-9TJQKA][SCHD]"))
+                    Regex expression = new Regex(@"(?:[2-9TJQKA][SCHD] ){9}[2-9TJQKA][SCHD]");
+                    if (!expression.IsMatch(input))
                     {
                         Console.WriteLine("Wrong input format.");
                         break;
@@ -38,7 +41,7 @@ namespace PokerHandSorter
                     {
                         string[] cards = input.Split(" ");
 
-                        
+
                         string[] handOneStr = Arrays.CopyOfRange(cards, 0, 5);
                         string[] handTwoStr = Arrays.CopyOfRange(cards, 5, 10);
 
@@ -68,7 +71,7 @@ namespace PokerHandSorter
 
                 Console.WriteLine("Player 1: " + winsPlayer1 + " hands");
                 Console.WriteLine("Player 2: " + winsPlayer2 + " hands");
-
+                Console.ReadLine();
                 Environment.Exit(0);
 
             }
@@ -77,6 +80,7 @@ namespace PokerHandSorter
                 Console.WriteLine(e.ToString());
                 Console.Write(e.StackTrace);
             }
+
         }
 
         public static int winner(Hand hand1, Hand hand2)
